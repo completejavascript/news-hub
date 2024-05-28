@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import {RouterView} from 'vue-router';
+
 import NewsNav from '@/components/NewsNav.vue';
 </script>
 
@@ -7,6 +9,8 @@ import NewsNav from '@/components/NewsNav.vue';
     <div class="hidden md:block md:w-80">
       <NewsNav />
     </div>
-    <div className="flex-1">main</div>
+    <div className="flex-1">
+      <RouterView />
+    </div>
   </div>
 </template>

@@ -1,5 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router';
+
 import HomeView from '../views/HomeView.vue';
+import CategoryNews from '../components/CategoryNews.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,6 +10,13 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      redirect: '/category/business',
+      children: [
+        {
+          path: 'category/:category',
+          component: CategoryNews,
+        },
+      ],
     },
     {
       path: '/about',
