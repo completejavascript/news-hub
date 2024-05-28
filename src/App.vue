@@ -6,8 +6,8 @@ import {RouterView, useRoute} from 'vue-router';
 import BrandName from '@/components/BrandName.vue';
 import GithubLink from '@/components/GithubLink.vue';
 import HeaderNav from '@/components/HeaderNav.vue';
-import HomeNav from '@/components/HomeNav.vue';
 import MenuButton from '@/components/MenuButton.vue';
+import NewsNav from '@/components/NewsNav.vue';
 import IconClose from '@/components/icons/IconClose.vue';
 import IconMenu from '@/components/icons/IconMenu.vue';
 import IconMoon from '@/components/icons/IconMoon.vue';
@@ -27,7 +27,10 @@ const currentPath = computed(() => route.path);
   <div class="h-screen bg-white dark:bg-slate-900 text-slate-400 antialiased relative">
     <div v-if="!isNavBarOpen">
       <div
-        class="sticky top-0 z-40 py-4 px-8 border-b border-slate-900/10 dark:border-slate-300/10 flex justify-between items-center"
+        :class="{
+          'sticky top-0 z-40 py-4 px-8 flex justify-between items-center': true,
+          'border-b border-slate-900/10 dark:border-slate-300/10': true,
+        }"
       >
         <div class="flex gap-10 items-center">
           <BrandName />
@@ -67,11 +70,12 @@ const currentPath = computed(() => route.path);
     :class="{
       'translate-x-0': isNavBarOpen,
       '-translate-x-full': !isNavBarOpen,
-      'fixed z-50 top-0 left-0 w-full h-full bg-white dark:bg-slate-900 transform ease-in-out transition-all duration-300': true,
+      'fixed z-50 top-0 left-0 w-full h-full bg-white dark:bg-slate-900': true,
+      'transform ease-in-out transition-all duration-300': true,
     }"
   >
     <div className="absolute h-full w-full top-0 pt-16">
-      <HomeNav />
+      <NewsNav />
     </div>
 
     <div className="absolute w-full flex items-center py-4 px-8 top-0">

@@ -1,5 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import NewsNav from '@/components/NewsNav.vue';
+</script>
 
 <template>
-  <main>Home</main>
+  <div className="h-full w-full flex absolute top-0 pt-16">
+    <div class="hidden md:block md:w-80">
+      <NewsNav />
+    </div>
+    <div className="flex-1">main</div>
+  </div>
 </template>

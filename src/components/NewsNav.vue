@@ -1,0 +1,41 @@
+<script setup lang="ts">
+import {ref} from 'vue';
+
+import type {Category} from '@/types';
+
+const categories = ref<{value: Category; label: string}[]>([
+  {value: 'business', label: 'Business'},
+  {value: 'entertainment', label: 'Entertainment'},
+  {value: 'general', label: 'General'},
+  {value: 'health', label: 'Health'},
+  {value: 'science', label: 'Science'},
+  {value: 'sports', label: 'Sports'},
+  {value: 'technology', label: 'Technology'},
+]);
+</script>
+
+<template>
+  <div
+    :class="{
+      'h-full relative overflow-y-auto px-8': true,
+      'text-slate-700 dark:text-slate-400': true,
+      'border-r border-slate-900/10 dark:border-slate-300/10': true,
+    }"
+  >
+    <div class="text-xl font-medium mt-6 mb-3">Categories</div>
+    <ul>
+      <li
+        v-for="category in categories"
+        :key="category.value"
+        :class="{
+          'py-1.5 px-4 border-l pl-4 -ml-px cursor-pointer': true,
+          'border-slate-900/10 dark:border-slate-300/10': true,
+          'hover:border-slate-400 dark:hover:border-slate-500': true,
+          'hover:text-slate-700 dark:hover:text-slate-400': true,
+        }"
+      >
+        {{ category.label }}
+      </li>
+    </ul>
+  </div>
+</template>
