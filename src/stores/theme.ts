@@ -38,6 +38,7 @@ export const useThemeStore = defineStore('theme', () => {
   }
 
   const currentTheme = ref<Theme>(getStorageTheme() ?? getMediaPreference());
+  setTheme(currentTheme.value);
 
   return {
     currentTheme,
