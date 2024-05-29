@@ -1,16 +1,8 @@
-<script setup lang="ts">
-import {RouterView} from 'vue-router';
-
-import NewsNav from '@/components/NewsNav.vue';
-</script>
-
 <template>
-  <div className="h-full w-full flex absolute top-0 pt-16">
-    <div class="hidden md:block md:w-80">
-      <NewsNav />
+  <main class="w-full h-full flex items-center justify-center flex-col p-4 gap-10">
+    <img src="@/assets/illustration_news.svg" class="w-full max-w-[400px]" />
+    <div class="text-slate-600 dark:text-slate-400 text-center">
+      Select a category or a favorite domain to start
     </div>
-    <div className="flex-1">
-      <RouterView />
-    </div>
-  </div>
+  </main>
 </template>
