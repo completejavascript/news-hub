@@ -9,6 +9,7 @@ const route = useRoute();
 const source = ref<string>(route.params.source as string);
 const data = ref([]);
 const loading = ref(false);
+const error = ref('');
 
 function fetchData() {
   loading.value = true;
@@ -22,6 +23,7 @@ function fetchData() {
     .catch((err) => {
       console.log({err});
       data.value = [];
+      error.value = err.message;
     })
     .finally(() => {
       loading.value = false;
@@ -37,5 +39,5 @@ fetchData();
 </script>
 
 <template>
-  <NewsGrid :data="data" :loading="loading" />
+  <NewsGrid :data="data" :loading="loading" :errMsg="error" />
 </template>

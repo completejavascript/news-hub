@@ -8,6 +8,7 @@ import NewsGrid from '@/components/NewsGrid.vue';
 const route = useRoute();
 const category = ref<string>(route.params.category as string);
 const data = ref([]);
+const error = ref('');
 const loading = ref(false);
 
 function fetchData() {
@@ -22,6 +23,7 @@ function fetchData() {
     .catch((err) => {
       console.log({err});
       data.value = [];
+      error.value = err.message;
     })
     .finally(() => {
       loading.value = false;
@@ -37,5 +39,5 @@ fetchData();
 </script>
 
 <template>
-  <NewsGrid :data="data" :loading="loading" />
+  <NewsGrid :data="data" :loading="loading" :errMsg="error" />
 </template>

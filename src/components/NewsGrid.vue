@@ -12,6 +12,7 @@ defineProps({
     required: true,
   },
   loading: Boolean,
+  errMsg: String,
 });
 </script>
 
@@ -28,7 +29,7 @@ defineProps({
     </template>
 
     <template v-else-if="data.length === 0">
-      <NewsNoData />
+      <NewsNoData :err-msg="errMsg" />
     </template>
 
     <template v-else>
