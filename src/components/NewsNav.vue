@@ -29,6 +29,11 @@ const defaultDomains = ref<string[]>([
   'cbsnews.com',
   'foxnews.com',
   'bloomberg.com',
+  'bleacherreport.com',
+  'businessinsider.com',
+  'buzzfeed.com',
+  'espn.com',
+  'financialpost.com',
 ]);
 
 const domains = ref(defaultDomains);
