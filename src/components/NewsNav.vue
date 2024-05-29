@@ -2,13 +2,34 @@
 import {ref} from 'vue';
 import {RouterLink} from 'vue-router';
 
-import type {Category} from '@/types';
+import axiosInstance from '@/axiosInstance';
+import type {Category, Source} from '@/types';
 
 const emit = defineEmits(['onClick']);
-
 function handleClick() {
   emit('onClick');
 }
+
+const sources = ref<Source[]>([]);
+const loadingSources = ref(false);
+
+function fetchSources() {
+  loadingSources.value = true;
+  axiosInstance
+    .get('top-headlines/sources')
+    .then((res) => {
+      sources.value = res.data.sources ?? [];
+    })
+    .catch((err) => {
+      console.log({err});
+      sources.value = [];
+    })
+    .finally(() => {
+      loadingSources.value = false;
+    });
+}
+
+fetchSources();
 
 const categories = ref<{value: Category; label: string}[]>([
   {value: 'business', label: 'Business'},
@@ -19,24 +40,6 @@ const categories = ref<{value: Category; label: string}[]>([
   {value: 'sports', label: 'Sports'},
   {value: 'technology', label: 'Technology'},
 ]);
-
-const defaultDomains = ref<string[]>([
-  'techcrunch.com',
-  'bbc.co.uk',
-  'thenextweb.com',
-  'cnn.com',
-  'apnews.com',
-  'cbsnews.com',
-  'foxnews.com',
-  'bloomberg.com',
-  'bleacherreport.com',
-  'businessinsider.com',
-  'buzzfeed.com',
-  'espn.com',
-  'financialpost.com',
-]);
-
-const domains = ref(defaultDomains);
 </script>
 
 <template>
@@ -46,7 +49,7 @@ const domains = ref(defaultDomains);
       'border-r border-slate-900/10 dark:border-slate-300/10': true,
     }"
   >
-    <nav class="flex flex-col text-slate-400">
+    <nav class="flex flex-col text-slate-400 pb-4">
       <div class="text-xl font-medium mt-6 mb-3 text-slate-800 dark:text-slate-300">Categories</div>
       <template v-for="category in categories" :key="category.value">
         <RouterLink
@@ -63,10 +66,10 @@ const domains = ref(defaultDomains);
         </RouterLink>
       </template>
 
-      <div class="text-xl font-medium mt-6 mb-3 text-slate-800 dark:text-slate-300">Domains</div>
-      <template v-for="domain in domains" :key="domain">
+      <div class="text-xl font-medium mt-6 mb-3 text-slate-800 dark:text-slate-300">Sources</div>
+      <template v-for="source in sources" :key="source.id">
         <RouterLink
-          :to="`/domain/${domain}`"
+          :to="`/source/${source.id}`"
           :class="{
             'py-1.5 px-4 border-l pl-4 -ml-px cursor-pointer': true,
             'border-slate-900/10 dark:border-slate-300/10': true,
@@ -75,7 +78,7 @@ const domains = ref(defaultDomains);
           }"
           @click="handleClick"
         >
-          {{ domain }}
+          {{ source.name }}
         </RouterLink>
       </template>
     </nav>

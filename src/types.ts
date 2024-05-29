@@ -26,3 +26,13 @@ export type News = {
   title?: string;
   url?: string;
 };
+
+export type Source = {
+  id?: string;
+  name?: string;
+  description?: string;
+  url?: string;
+  category?: Category;
+  language?: string;
+  country?: string;
+};
