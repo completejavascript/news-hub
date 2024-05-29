@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type {PropType} from 'vue';
+import type { PropType } from 'vue';
+import { RouterLink } from 'vue-router';
 
-import type {News} from '@/types';
+import type { News } from '@/types';
 
 defineProps({
   news: {
@@ -12,18 +13,12 @@ defineProps({
 </script>
 
 <template>
-  <div
-    :class="{
-      'max-w-xl mx-auto bg-white rounded-lg border overflow-hidden p-4 flex flex-col': true,
-      'dark:bg-slate-800  dark:border-slate-700': true,
-    }"
-  >
-    <a
-      :href="news?.url"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="text-xl font-semibold text-slate-700 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-200"
-    >
+  <div :class="{
+    'max-w-xl mx-auto bg-white rounded-lg border overflow-hidden p-4 flex flex-col': true,
+    'dark:bg-slate-800  dark:border-slate-700': true,
+  }">
+    <a :href="news?.url" target="_blank" rel="noopener noreferrer"
+      class="text-xl font-semibold text-slate-700 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-200">
       <h1>{{ news.title }}</h1>
     </a>
 
@@ -42,14 +37,10 @@ defineProps({
 
     <div class="mt-2 text-sm text-slate-500 dark:text-slate-400">
       Source:
-      <a
-        :href="`/source/${news?.source?.id}`"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="font-semibold hover:text-slate-700 dark:hover:text-slate-300"
-      >
+      <RouterLink :to="`/source/${news?.source?.id}`"
+        class="font-semibold hover:text-slate-700 dark:hover:text-slate-300">
         <span>{{ news?.source?.name }}</span>
-      </a>
+      </RouterLink>
     </div>
 
     <div class="flex-1" />
