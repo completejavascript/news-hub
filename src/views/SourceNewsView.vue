@@ -14,9 +14,7 @@ const error = ref('');
 function fetchData() {
   loading.value = true;
   axiosInstance
-    .get('top-headlines', {
-      params: {sources: source.value},
-    })
+    .get(`top-headlines?sources=${source.value}`)
     .then((res) => {
       data.value = res.data.articles ?? [];
     })

@@ -14,9 +14,7 @@ const loading = ref(false);
 function fetchData() {
   loading.value = true;
   axiosInstance
-    .get('top-headlines', {
-      params: {category: category.value},
-    })
+    .get(`top-headlines?category=${category.value}`)
     .then((res) => {
       data.value = res.data.articles ?? [];
     })

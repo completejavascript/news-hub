@@ -1,7 +1,7 @@
 import type {AxiosRequestHeaders, AxiosResponse, InternalAxiosRequestConfig} from 'axios';
 import axios from 'axios';
 
-import {API_KEY, HOST_API} from '@/config';
+import {API_KEY, HOST_API, NEWS_API} from '@/config';
 
 const axiosInstance = axios.create({
   baseURL: HOST_API,
@@ -15,6 +15,13 @@ axiosInstance.interceptors.request.use((request: InternalAxiosRequestConfig) => 
       Authorization: API_KEY,
     } as AxiosRequestHeaders;
   }
+
+  // Convert to using cloudflare pages
+  request.params = {
+    url: `${NEWS_API}/${request.url}`,
+  };
+  request.url = '';
+
   return request;
 });
 

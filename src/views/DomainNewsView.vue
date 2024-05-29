@@ -14,9 +14,7 @@ const error = ref('');
 function fetchData() {
   loading.value = true;
   axiosInstance
-    .get('everything', {
-      params: {domains: domain.value},
-    })
+    .get(`everything?domains=${domain.value}`)
     .then((res) => {
       data.value = res.data.articles ?? [];
     })
