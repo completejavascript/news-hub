@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {storeToRefs} from 'pinia';
-import {computed, ref} from 'vue';
-import {RouterView, useRoute} from 'vue-router';
+import {ref} from 'vue';
+import {RouterView} from 'vue-router';
 
 import BrandName from '@/components/BrandName.vue';
 import GithubLink from '@/components/GithubLink.vue';
@@ -17,10 +17,7 @@ import {useThemeStore} from '@/stores/theme';
 const themeStore = useThemeStore();
 const {currentTheme} = storeToRefs(themeStore);
 const {toggleTheme} = themeStore;
-
 const isNavBarOpen = ref(false);
-const route = useRoute();
-const currentPath = computed(() => route.path);
 </script>
 
 <template>
@@ -52,11 +49,9 @@ const currentPath = computed(() => route.path);
 
           <GithubLink />
 
-          <template v-if="currentPath === '/'">
-            <MenuButton :is-hidden-md="true" @on-click="isNavBarOpen = true">
-              <IconMenu />
-            </MenuButton>
-          </template>
+          <MenuButton :is-hidden-md="true" @on-click="isNavBarOpen = true">
+            <IconMenu />
+          </MenuButton>
         </div>
       </div>
 
@@ -75,7 +70,7 @@ const currentPath = computed(() => route.path);
     }"
   >
     <div className="absolute h-full w-full top-0 pt-16">
-      <NewsNav />
+      <NewsNav @on-click="isNavBarOpen = false" />
     </div>
 
     <div className="absolute w-full flex items-center py-4 px-8 top-0">
@@ -83,11 +78,9 @@ const currentPath = computed(() => route.path);
         <BrandName />
       </div>
 
-      <template v-if="currentPath === '/'">
-        <MenuButton @on-click="isNavBarOpen = false">
-          <IconClose />
-        </MenuButton>
-      </template>
+      <MenuButton @on-click="isNavBarOpen = false">
+        <IconClose />
+      </MenuButton>
     </div>
   </div>
 </template>

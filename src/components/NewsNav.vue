@@ -4,6 +4,12 @@ import {RouterLink} from 'vue-router';
 
 import type {Category} from '@/types';
 
+const emit = defineEmits(['onClick']);
+
+function handleClick() {
+  emit('onClick');
+}
+
 const categories = ref<{value: Category; label: string}[]>([
   {value: 'business', label: 'Business'},
   {value: 'entertainment', label: 'Entertainment'},
@@ -46,6 +52,7 @@ const domains = ref(defaultDomains);
             'hover:border-slate-400 dark:hover:border-slate-500': true,
             'text-slate-500 hover:text-slate-700 dark:hover:text-slate-400': true,
           }"
+          @click="handleClick"
         >
           {{ category.label }}
         </RouterLink>
@@ -61,6 +68,7 @@ const domains = ref(defaultDomains);
             'hover:border-slate-400 dark:hover:border-slate-500': true,
             'text-slate-500 hover:text-slate-700 dark:hover:text-slate-400': true,
           }"
+          @click="handleClick"
         >
           {{ domain }}
         </RouterLink>
