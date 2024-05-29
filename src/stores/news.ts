@@ -1,8 +1,9 @@
-import {defineStore} from 'pinia';
-import {ref} from 'vue';
+import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
 import axiosInstance from '@/axiosInstance';
-import type {Source} from '@/types';
+import type { Source } from '@/types';
+import { getUrl } from '@/utils';
 
 export const useNewsStore = defineStore('news', () => {
   const sources = ref<Source[] | null>(null);
@@ -13,7 +14,7 @@ export const useNewsStore = defineStore('news', () => {
 
     loading.value = true;
     axiosInstance
-      .get(encodeURIComponent('top-headlines/sources'))
+      .get(getUrl('top-headlines/sources'))
       .then((res) => {
         sources.value = res.data.sources ?? [];
       })

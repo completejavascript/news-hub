@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router';
 
 import axiosInstance from '@/axiosInstance';
 import NewsGrid from '@/components/NewsGrid.vue';
+import { getUrl } from '@/utils';
 
 const route = useRoute();
 const source = ref<string>(route.params.source as string);
@@ -14,7 +15,7 @@ const error = ref('');
 function fetchData() {
   loading.value = true;
   axiosInstance
-    .get(encodeURIComponent(`top-headlines?sources=${source.value}`))
+    .get(getUrl(`top-headlines?sources=${source.value}`))
     .then((res: any) => {
       data.value = res.data.articles ?? [];
     })
