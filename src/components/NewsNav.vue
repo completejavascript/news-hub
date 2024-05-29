@@ -14,10 +14,15 @@ const categories = ref<{value: Category; label: string}[]>([
   {value: 'technology', label: 'Technology'},
 ]);
 
-const defaultDomains = ref<{value: string; label: string}[]>([
-  {value: 'techcrunch.com', label: 'techcrunch.com'},
-  {value: 'bbc.co.uk', label: 'bbc.co.uk'},
-  {value: 'thenextweb.com', label: 'thenextweb.com'},
+const defaultDomains = ref<string[]>([
+  'techcrunch.com',
+  'bbc.co.uk',
+  'thenextweb.com',
+  'cnn.com',
+  'apnews.com',
+  'cbsnews.com',
+  'foxnews.com',
+  'bloomberg.com',
 ]);
 
 const domains = ref(defaultDomains);
@@ -47,9 +52,9 @@ const domains = ref(defaultDomains);
       </template>
 
       <div class="text-xl font-medium mt-6 mb-3 text-slate-800 dark:text-slate-300">Domains</div>
-      <template v-for="domain in domains" :key="domain.value">
+      <template v-for="domain in domains" :key="domain">
         <RouterLink
-          :to="`/domain/${domain.value}`"
+          :to="`/domain/${domain}`"
           :class="{
             'py-1.5 px-4 border-l pl-4 -ml-px cursor-pointer': true,
             'border-slate-900/10 dark:border-slate-300/10': true,
@@ -57,7 +62,7 @@ const domains = ref(defaultDomains);
             'text-slate-500 hover:text-slate-700 dark:hover:text-slate-400': true,
           }"
         >
-          {{ domain.label }}
+          {{ domain }}
         </RouterLink>
       </template>
     </nav>
