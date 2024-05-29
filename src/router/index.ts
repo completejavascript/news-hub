@@ -19,6 +19,10 @@ const router = createRouter({
           path: 'category/:category',
           component: () => import('../views/CategoryNewsView.vue'),
         },
+        {
+          path: 'source/:source',
+          component: () => import('../views/SourceNewsView.vue'),
+        },
       ],
     },
     {
