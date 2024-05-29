@@ -3,9 +3,10 @@ import {storeToRefs} from 'pinia';
 import {ref} from 'vue';
 import {RouterLink} from 'vue-router';
 
+import SourcesSkeleton from '@/components/SourcesSkeleton.vue';
+import IconAutoRenew from '@/components/icons/IconAutoRenew.vue';
 import {useNewsStore} from '@/stores/news';
 import type {Category} from '@/types';
-import SourcesSkeleton from '@/components/SourcesSkeleton.vue';
 
 const emit = defineEmits(['onClick']);
 function handleClick() {
@@ -14,6 +15,7 @@ function handleClick() {
 
 const newsStore = useNewsStore();
 const {sources, loading: loadingSource} = storeToRefs(newsStore);
+const {fetchSources} = newsStore;
 
 const categories = ref<{value: Category; label: string}[]>([
   {value: 'business', label: 'Business'},
@@ -24,6 +26,10 @@ const categories = ref<{value: Category; label: string}[]>([
   {value: 'sports', label: 'Sports'},
   {value: 'technology', label: 'Technology'},
 ]);
+
+function handleRefetchSources() {
+  fetchSources(true);
+}
 </script>
 
 <template>
@@ -50,7 +56,17 @@ const categories = ref<{value: Category; label: string}[]>([
         </RouterLink>
       </template>
 
-      <div class="text-xl font-medium mt-6 mb-3 text-slate-800 dark:text-slate-300">Sources</div>
+      <div
+        class="text-xl font-medium mt-6 mb-3 text-slate-800 dark:text-slate-300 flex justify-between items-center"
+      >
+        <span>Sources</span>
+        <div
+          className="w-5 h-5 text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 cursor-pointer"
+          @click="handleRefetchSources"
+        >
+          <IconAutoRenew />
+        </div>
+      </div>
       <template v-if="loadingSource">
         <SourcesSkeleton />
       </template>

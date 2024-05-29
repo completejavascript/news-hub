@@ -8,8 +8,8 @@ export const useNewsStore = defineStore('news', () => {
   const sources = ref<Source[] | null>(null);
   const loading = ref(false);
 
-  function fetchSources() {
-    if (sources.value) return;
+  function fetchSources(forceUpdate: boolean = false) {
+    if (sources.value && !forceUpdate) return;
 
     loading.value = true;
     axiosInstance
@@ -31,5 +31,6 @@ export const useNewsStore = defineStore('news', () => {
   return {
     sources,
     loading,
+    fetchSources,
   };
 });
