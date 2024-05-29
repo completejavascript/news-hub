@@ -15,10 +15,15 @@ const routes = ref<Route[]>([
     <template v-for="route in routes" :key="route.href">
       <RouterLink
         :to="route.href"
-        class="text-slate-400 hover:text-slate-500 dark:hover:text-slate-300"
-        active-class="text-slate-900 dark:text-slate-100 hover:text-slate-500 dark:hover:text-slate-300"
+        class="text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
         >{{ route.label }}</RouterLink
       >
     </template>
   </nav>
 </template>
+
+<style scoped>
+.router-link-active {
+  @apply text-slate-900 dark:text-slate-100 hover:text-slate-500 dark:hover:text-slate-500;
+}
+</style>

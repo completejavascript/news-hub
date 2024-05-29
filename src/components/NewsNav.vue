@@ -31,9 +31,8 @@ const categories = ref<{value: Category; label: string}[]>([
             'py-1.5 px-4 border-l pl-4 -ml-px cursor-pointer': true,
             'border-slate-900/10 dark:border-slate-300/10': true,
             'hover:border-slate-400 dark:hover:border-slate-500': true,
-            'hover:text-slate-700 dark:hover:text-slate-400': true,
+            'text-slate-500 hover:text-slate-700 dark:hover:text-slate-400': true,
           }"
-          active-class="text-slate-900 dark:text-slate-100 hover:text-slate-500 dark:hover:text-slate-300"
         >
           {{ category.label }}
         </RouterLink>
@@ -41,3 +40,9 @@ const categories = ref<{value: Category; label: string}[]>([
     </nav>
   </div>
 </template>
+
+<style scoped>
+.router-link-active {
+  @apply text-slate-900 dark:text-slate-100 hover:text-slate-500 dark:hover:text-slate-300;
+}
+</style>
