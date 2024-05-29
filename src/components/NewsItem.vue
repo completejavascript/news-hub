@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import type {News} from '@/types';
 import type {PropType} from 'vue';
+
+import type {News} from '@/types';
 
 defineProps({
   news: {
@@ -14,28 +15,41 @@ defineProps({
   <div
     :class="{
       'max-w-xl mx-auto bg-white rounded-lg border overflow-hidden p-4 flex flex-col': true,
-      'dark:bg-gray-800  dark:border-gray-700': true,
+      'dark:bg-slate-800  dark:border-slate-700': true,
     }"
   >
-    <a :href="news?.url">
-      <h1 class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ news.title }}</h1>
+    <a
+      :href="news?.url"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-xl font-semibold text-slate-700 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-200"
+    >
+      <h1>{{ news.title }}</h1>
     </a>
 
-    <p class="mt-2 text-gray-700 dark:text-gray-300">{{ news.description }}</p>
+    <p class="mt-2 text-slate-700 dark:text-slate-300">{{ news.description }}</p>
 
-    <div class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+    <div class="mt-4 text-sm text-slate-500 dark:text-slate-400">
       By: <span class="font-semibold">{{ news.author ? news.author : 'Unknown Author' }}</span>
     </div>
 
-    <div class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+    <div class="mt-2 text-sm text-slate-500 dark:text-slate-400">
       Published on:
       <span class="font-semibold">{{
         news.publishedAt ? new Date(news.publishedAt).toLocaleDateString() : ''
       }}</span>
     </div>
 
-    <div class="mt-2 text-sm text-gray-500 dark:text-gray-400">
-      Source: <span class="font-semibold">{{ news?.source?.name }}</span>
+    <div class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+      Source:
+      <a
+        :href="`/source/${news?.source?.id}`"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-semibold hover:text-slate-700 dark:hover:text-slate-300"
+      >
+        <span>{{ news?.source?.name }}</span>
+      </a>
     </div>
 
     <div class="flex-1" />
