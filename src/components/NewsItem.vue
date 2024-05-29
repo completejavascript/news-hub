@@ -41,12 +41,7 @@ defineProps({
     <div class="flex-1" />
 
     <div class="mt-4">
-      <a
-        :href="news?.url"
-        class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-600"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a :href="news?.url" class="text-link" target="_blank" rel="noopener noreferrer">
         Read more
       </a>
     </div>

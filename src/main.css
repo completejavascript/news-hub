@@ -24,3 +24,7 @@
   border-radius: 0.25rem;
   border: 0.5rem solid rgba(100, 116, 139, 0.16);
 }
+
+.text-link {
+  @apply text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-600;
+}
