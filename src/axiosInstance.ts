@@ -5,6 +5,9 @@ import {API_KEY, HOST_API} from '@/config';
 
 const axiosInstance = axios.create({
   baseURL: HOST_API,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
 });
 
 axiosInstance.interceptors.request.use((request: InternalAxiosRequestConfig) => {
