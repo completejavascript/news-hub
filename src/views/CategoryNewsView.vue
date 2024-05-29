@@ -5,6 +5,7 @@ import {useRoute} from 'vue-router';
 import axiosInstance from '@/axiosInstance';
 import NewsSkeleton from '@/components/NewsSkeleton.vue';
 import NewsItem from '@/components/NewsItem.vue';
+import NewsNoData from '@/components/NewsNoData.vue';
 
 const route = useRoute();
 const category = ref<string>(route.params.category as string);
@@ -50,8 +51,7 @@ fetchData();
     </template>
 
     <template v-else-if="data.length === 0">
-      <img src="@/assets/illustration_no_data.svg" class="w-full max-w-[400px]" />
-      <div class="text-slate-600 dark:text-slate-400 text-center">No data</div>
+      <NewsNoData />
     </template>
 
     <template v-else>
