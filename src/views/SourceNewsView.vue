@@ -4,6 +4,7 @@ import {useRoute} from 'vue-router';
 
 import axiosInstance from '@/axiosInstance';
 import NewsGrid from '@/components/NewsGrid.vue';
+import {API_KEY, NEWS_API} from '@/config';
 
 const route = useRoute();
 const source = ref<string>(route.params.source as string);
@@ -12,11 +13,10 @@ const loading = ref(false);
 const error = ref('');
 
 function fetchData() {
+  const url = `${NEWS_API}/top-headlines?apiKey=${API_KEY}&sources=${source.value}`;
   loading.value = true;
   axiosInstance
-    .get('top-headlines', {
-      params: {sources: source.value},
-    })
+    .get(`/?url=${encodeURIComponent(url)}`)
     .then((res) => {
       data.value = res.data.articles ?? [];
     })

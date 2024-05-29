@@ -2,6 +2,7 @@ import {defineStore} from 'pinia';
 import {ref} from 'vue';
 
 import axiosInstance from '@/axiosInstance';
+import {API_KEY, NEWS_API} from '@/config';
 import type {Source} from '@/types';
 
 export const useNewsStore = defineStore('news', () => {
@@ -11,9 +12,10 @@ export const useNewsStore = defineStore('news', () => {
   function fetchSources(forceUpdate: boolean = false) {
     if (sources.value && !forceUpdate) return;
 
+    const url = `${NEWS_API}/top-headlines/sources?apiKey=${API_KEY}`;
     loading.value = true;
     axiosInstance
-      .get('top-headlines/sources')
+      .get(`/?url=${encodeURIComponent(url)}`)
       .then((res) => {
         sources.value = res.data.sources ?? [];
       })
