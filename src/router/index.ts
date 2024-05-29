@@ -23,6 +23,10 @@ const router = createRouter({
           path: 'source/:source',
           component: () => import('../views/SourceNewsView.vue'),
         },
+        {
+          path: 'domain/:domain',
+          component: () => import('../views/DomainNewsView.vue'),
+        },
       ],
     },
     {

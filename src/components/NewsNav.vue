@@ -13,6 +13,14 @@ const categories = ref<{value: Category; label: string}[]>([
   {value: 'sports', label: 'Sports'},
   {value: 'technology', label: 'Technology'},
 ]);
+
+const defaultDomains = ref<{value: string; label: string}[]>([
+  {value: 'techcrunch.com', label: 'techcrunch.com'},
+  {value: 'bbc.co.uk', label: 'bbc.co.uk'},
+  {value: 'thenextweb.com', label: 'thenextweb.com'},
+]);
+
+const domains = ref(defaultDomains);
 </script>
 
 <template>
@@ -38,7 +46,20 @@ const categories = ref<{value: Category; label: string}[]>([
         </RouterLink>
       </template>
 
-      <div class="text-xl font-medium mt-6 mb-3 text-slate-800 dark:text-slate-300">Favorites</div>
+      <div class="text-xl font-medium mt-6 mb-3 text-slate-800 dark:text-slate-300">Domains</div>
+      <template v-for="domain in domains" :key="domain.value">
+        <RouterLink
+          :to="`/domain/${domain.value}`"
+          :class="{
+            'py-1.5 px-4 border-l pl-4 -ml-px cursor-pointer': true,
+            'border-slate-900/10 dark:border-slate-300/10': true,
+            'hover:border-slate-400 dark:hover:border-slate-500': true,
+            'text-slate-500 hover:text-slate-700 dark:hover:text-slate-400': true,
+          }"
+        >
+          {{ domain.label }}
+        </RouterLink>
+      </template>
     </nav>
   </div>
 </template>
