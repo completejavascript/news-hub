@@ -11,32 +11,39 @@ defineProps({
 </script>
 
 <template>
-  <div className="max-w-xl mx-auto bg-white rounded-lg border overflow-hidden p-4 flex flex-col">
-    <h1 className="text-xl font-bold text-gray-900">{{ news.title }}</h1>
+  <div
+    :class="{
+      'max-w-xl mx-auto bg-white rounded-lg border overflow-hidden p-4 flex flex-col': true,
+      'dark:bg-gray-800  dark:border-gray-700': true,
+    }"
+  >
+    <a :href="news?.url">
+      <h1 class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ news.title }}</h1>
+    </a>
 
-    <p className="mt-2 text-gray-700">{{ news.description }}</p>
+    <p class="mt-2 text-gray-700 dark:text-gray-300">{{ news.description }}</p>
 
-    <div className="mt-4 text-sm text-gray-500">
-      By: <span className="font-semibold">{{ news.author ? news.author : 'Unknown Author' }}</span>
+    <div class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+      By: <span class="font-semibold">{{ news.author ? news.author : 'Unknown Author' }}</span>
     </div>
 
-    <div className="mt-2 text-sm text-gray-500">
+    <div class="mt-2 text-sm text-gray-500 dark:text-gray-400">
       Published on:
-      <span className="font-semibold">{{
+      <span class="font-semibold">{{
         news.publishedAt ? new Date(news.publishedAt).toLocaleDateString() : ''
       }}</span>
     </div>
 
-    <div className="mt-2 text-sm text-gray-500">
-      Source: <span className="font-semibold">{{ news?.source?.name }}</span>
+    <div class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+      Source: <span class="font-semibold">{{ news?.source?.name }}</span>
     </div>
 
     <div class="flex-1" />
 
-    <div className="mt-4">
+    <div class="mt-4">
       <a
         :href="news?.url"
-        className="text-red-600 hover:underline"
+        class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-600"
         target="_blank"
         rel="noopener noreferrer"
       >
