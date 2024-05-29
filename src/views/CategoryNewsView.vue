@@ -3,9 +3,7 @@ import {ref, watch} from 'vue';
 import {useRoute} from 'vue-router';
 
 import axiosInstance from '@/axiosInstance';
-import NewsSkeleton from '@/components/NewsSkeleton.vue';
-import NewsItem from '@/components/NewsItem.vue';
-import NewsNoData from '@/components/NewsNoData.vue';
+import NewsGrid from '@/components/NewsGrid.vue';
 
 const route = useRoute();
 const category = ref<string>(route.params.category as string);
@@ -39,27 +37,5 @@ fetchData();
 </script>
 
 <template>
-  <main
-    :class="{
-      'w-full h-full flex flex-col items-center p-4 gap-10 overflow-y-auto': true,
-      'justify-start': loading || data.length > 0,
-      'justify-center': !loading && !data.length,
-    }"
-  >
-    <template v-if="loading">
-      <NewsSkeleton />
-    </template>
-
-    <template v-else-if="data.length === 0">
-      <NewsNoData />
-    </template>
-
-    <template v-else>
-      <div class="w-full grid gap-4 grid-cols-[repeat(auto-fill,minmax(240px,1fr))]">
-        <template v-for="item in data" :key="item.url">
-          <NewsItem :news="item" />
-        </template>
-      </div>
-    </template>
-  </main>
+  <NewsGrid :data="data" :loading="loading" />
 </template>

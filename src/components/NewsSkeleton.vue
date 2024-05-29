@@ -1,5 +1,12 @@
 <script setup lang="ts">
-const arr = Array.from({length: 8}, (v, i) => i);
+const props = defineProps({
+  count: {
+    type: Number,
+    default: 10,
+  },
+});
+
+const arr = Array.from({length: props.count}, (_, i) => i);
 </script>
 
 <template>
