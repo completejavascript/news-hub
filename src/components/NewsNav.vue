@@ -22,8 +22,8 @@ const categories = ref<{value: Category; label: string}[]>([
       'border-r border-slate-900/10 dark:border-slate-300/10': true,
     }"
   >
-    <div class="text-xl font-medium mt-6 mb-3 text-slate-800 dark:text-slate-300">Categories</div>
     <nav class="flex flex-col text-slate-400">
+      <div class="text-xl font-medium mt-6 mb-3 text-slate-800 dark:text-slate-300">Categories</div>
       <template v-for="category in categories" :key="category.value">
         <RouterLink
           :to="`/category/${category.value}`"
@@ -37,6 +37,8 @@ const categories = ref<{value: Category; label: string}[]>([
           {{ category.label }}
         </RouterLink>
       </template>
+
+      <div class="text-xl font-medium mt-6 mb-3 text-slate-800 dark:text-slate-300">Favorites</div>
     </nav>
   </div>
 </template>

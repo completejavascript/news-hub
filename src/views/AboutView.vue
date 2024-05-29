@@ -39,6 +39,16 @@
           >Pinia</a
         >: The intuitive store for Vue.js.
       </li>
+      <li>
+        •
+        <a
+          href="https://tailwindcss.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-link"
+          >Tailwindcss</a
+        >: Rapidly build modern websites without ever leaving the HTML.
+      </li>
     </ul>
 
     <h2 class="text-xl font-medium mt-6 mb-3 text-slate-800 dark:text-slate-300">Resources</h2>
