@@ -6,7 +6,7 @@ export default {
     if (!targetUrl) {
       return new Response(
         JSON.stringify({
-          error: `Missing "url" query parameter ${JSON.stringify(request.url)} ${JSON.stringify(url)} ${targetUrl}`,
+          error: `Missing "url" query parameter ${JSON.stringify(request)} ${JSON.stringify(url)} ${targetUrl}`,
         }),
         {
           status: 400,
