@@ -1,35 +1,19 @@
 <script setup lang="ts">
+import {storeToRefs} from 'pinia';
 import {ref} from 'vue';
 import {RouterLink} from 'vue-router';
 
-import axiosInstance from '@/axiosInstance';
-import type {Category, Source} from '@/types';
+import {useNewsStore} from '@/stores/news';
+import type {Category} from '@/types';
+import SourcesSkeleton from '@/components/SourcesSkeleton.vue';
 
 const emit = defineEmits(['onClick']);
 function handleClick() {
   emit('onClick');
 }
 
-const sources = ref<Source[]>([]);
-const loadingSources = ref(false);
-
-function fetchSources() {
-  loadingSources.value = true;
-  axiosInstance
-    .get('top-headlines/sources')
-    .then((res) => {
-      sources.value = res.data.sources ?? [];
-    })
-    .catch((err) => {
-      console.log({err});
-      sources.value = [];
-    })
-    .finally(() => {
-      loadingSources.value = false;
-    });
-}
-
-fetchSources();
+const newsStore = useNewsStore();
+const {sources, loading: loadingSource} = storeToRefs(newsStore);
 
 const categories = ref<{value: Category; label: string}[]>([
   {value: 'business', label: 'Business'},
@@ -67,7 +51,10 @@ const categories = ref<{value: Category; label: string}[]>([
       </template>
 
       <div class="text-xl font-medium mt-6 mb-3 text-slate-800 dark:text-slate-300">Sources</div>
-      <template v-for="source in sources" :key="source.id">
+      <template v-if="loadingSource">
+        <SourcesSkeleton />
+      </template>
+      <template v-else v-for="source in sources" :key="source.id">
         <RouterLink
           :to="`/source/${source.id}`"
           :class="{
