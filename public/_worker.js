@@ -4,13 +4,18 @@ export default {
     const targetUrl = url.searchParams.get('url');
 
     if (!targetUrl) {
-      return new Response(JSON.stringify({error: 'Missing "url" query parameter'}), {
-        status: 400,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-      });
+      return new Response(
+        JSON.stringify({
+          error: `Missing "url" query parameter ${JSON.stringify(request.url)} ${JSON.stringify(url)} ${targetUrl}`,
+        }),
+        {
+          status: 400,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        }
+      );
     }
 
     try {
