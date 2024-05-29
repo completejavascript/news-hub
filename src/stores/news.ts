@@ -13,7 +13,7 @@ export const useNewsStore = defineStore('news', () => {
 
     loading.value = true;
     axiosInstance
-      .get('top-headlines/sources')
+      .get(encodeURIComponent('top-headlines/sources'))
       .then((res) => {
         sources.value = res.data.sources ?? [];
       })

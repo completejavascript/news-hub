@@ -1,5 +1,5 @@
 export async function onRequestGet(context) {
-  const url = `https://newsapi.org/v2/${context.params.url.join('/')}`;
+  const url = `https://newsapi.org/v2/${decodeURIComponent(context.params.url)}`;
 
   try {
     const modifiedRequest = new Request(url, context.request);

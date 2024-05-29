@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {ref, watch} from 'vue';
-import {useRoute} from 'vue-router';
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 import axiosInstance from '@/axiosInstance';
 import NewsGrid from '@/components/NewsGrid.vue';
@@ -14,14 +14,12 @@ const error = ref('');
 function fetchData() {
   loading.value = true;
   axiosInstance
-    .get('top-headlines', {
-      params: {sources: source.value},
-    })
-    .then((res) => {
+    .get(encodeURIComponent(`top-headlines?sources=${source.value}`))
+    .then((res: any) => {
       data.value = res.data.articles ?? [];
     })
-    .catch((err) => {
-      console.log({err});
+    .catch((err: any) => {
+      console.log({ err });
       data.value = [];
       error.value = err.message;
     })
