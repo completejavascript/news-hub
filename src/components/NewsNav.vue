@@ -2,16 +2,16 @@
 import {ref} from 'vue';
 import {RouterLink} from 'vue-router';
 
-import type {Route} from '@/types';
+import type {Category} from '@/types';
 
-const categories = ref<Route[]>([
-  {href: '/category/business', label: 'Business'},
-  {href: '/category/entertainment', label: 'Entertainment'},
-  {href: '/category/general', label: 'General'},
-  {href: '/category/health', label: 'Health'},
-  {href: '/category/science', label: 'Science'},
-  {href: '/category/sports', label: 'Sports'},
-  {href: '/category/technology', label: 'Technology'},
+const categories = ref<{value: Category; label: string}[]>([
+  {value: 'business', label: 'Business'},
+  {value: 'entertainment', label: 'Entertainment'},
+  {value: 'general', label: 'General'},
+  {value: 'health', label: 'Health'},
+  {value: 'science', label: 'Science'},
+  {value: 'sports', label: 'Sports'},
+  {value: 'technology', label: 'Technology'},
 ]);
 </script>
 
@@ -24,9 +24,9 @@ const categories = ref<Route[]>([
   >
     <div class="text-xl font-medium mt-6 mb-3 text-slate-700 dark:text-slate-400">Categories</div>
     <nav class="flex flex-col text-slate-400">
-      <template v-for="category in categories" :key="category.href">
+      <template v-for="category in categories" :key="category.value">
         <RouterLink
-          :to="category.href"
+          :to="`/category/${category.value}`"
           :class="{
             'py-1.5 px-4 border-l pl-4 -ml-px cursor-pointer': true,
             'border-slate-900/10 dark:border-slate-300/10': true,
